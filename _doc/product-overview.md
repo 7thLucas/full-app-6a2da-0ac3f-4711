@@ -40,7 +40,7 @@ Every governance decision is logged, timestamped, and auditable.
    - Model-to-model disagreement alerts
    - Governance decisions log (auditable)
 
-3. **Pricing Page** — Monthly and annual subscription tiers. Per-seat and enterprise contract options clearly presented.
+3. **Pricing Page** — Monthly and annual subscription tiers. Per-seat and enterprise contract options clearly presented. Published tiers: Professional ($2,500/mo), Enterprise ($8,500/mo), White-Label (custom).
 
 4. **Book a Demo Flow** — Structured intake for enterprise sales conversations. Captures company size, AI use cases, and urgency signals.
 
