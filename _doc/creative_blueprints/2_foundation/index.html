@@ -1,40 +1,85 @@
 <style>
-  .mode-landscape .sl-foundation-layout { display: flex; flex-direction: row; align-items: stretch; min-height: 100%; }
-  .mode-landscape .sl-content-panel { width: 55%; padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
-  .mode-landscape .sl-visual-panel { width: 45%; min-height: 0; }
-  .mode-portrait .sl-foundation-layout { display: flex; flex-direction: column; min-height: 100%; }
-  .mode-portrait .sl-content-panel { padding: 2rem 1.5rem; }
-  .mode-portrait .sl-visual-panel { min-height: 280px; }
+  .mode-landscape .sl-layout { flex-direction: row; }
+  .mode-portrait .sl-layout { flex-direction: column; }
+  .mode-landscape .sl-content { width: 58%; }
+  .mode-landscape .sl-visual { width: 42%; }
+  .mode-portrait .sl-content { width: 100%; }
+  .mode-portrait .sl-visual { width: 100%; height: 220px; }
 </style>
-<section class="w-full h-full overflow-auto bg-white">
-  <div class="sl-foundation-layout">
-    <div class="sl-content-panel">
-      <div class="flex items-center justify-between mb-4">
-        <span class="inline-block text-xs font-semibold tracking-widest uppercase" style="color:#1e40af;">Foundation</span>
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 border rounded-full" style="background-color:#1e40af; border-color:#1e40af30;">
-          <span class="text-xs font-semibold" style="color:#ffffff;">Validated</span>
 
-        </span>
+<section class="w-full h-full overflow-auto bg-white">
+  <div class="w-full h-full flex sl-layout">
+
+    <!-- Content column -->
+    <div class="sl-content p-10 flex flex-col gap-5">
+
+      <div>
+        <p class="text-cyan-600 text-xs font-bold tracking-widest uppercase mb-1.5">The Landscape</p>
+        <h2 class="text-slate-900 font-black leading-tight" style="font-size:1.75rem">Enterprise AI is powerful.<br>It is not governed.</h2>
       </div>
-      <h1 class="text-3xl font-bold text-slate-900 leading-tight mb-8">AI systems drift, hallucinate, and fail silently—exposing companies to undetected threats and corruption.</h1>
-      <div class="space-y-5">
-        <div class="border-l-4 pl-4 relative" style="border-color:#F43F5E;">
-          <h2 class="text-sm font-semibold uppercase tracking-wide mb-1" style="color:#E11D48;">The Problem</h2>
-          <p class="text-slate-700 leading-relaxed text-sm">AI systems operate as black boxes. One drifted model, one hallucination, one corrupt decision—and your security is compromised. Enterprises have no real-time visibility into model behavior, inter-model disagreement, or governance decisions. Silent failures expose companies to breaches, compliance violations, and undetected threats.</p>
+
+      <div class="flex-1 flex flex-col gap-4 min-h-0">
+
+        <!-- Problem zone -->
+        <div class="border-l-4 border-red-400 bg-red-50 rounded-r-2xl p-5 flex-1">
+          <p class="text-red-600 text-xs font-bold tracking-widest uppercase mb-2">The Problem</p>
+          <p class="text-slate-700 text-xs leading-relaxed mb-3">
+            Businesses deploy Gemini, Claude, and ChatGPT at scale — with no independent layer governing what those models actually do. The damage is invisible until it isn't:
+          </p>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div class="flex items-start gap-1.5">
+              <span class="text-red-400 font-black flex-shrink-0 text-sm leading-tight mt-0.5">—</span>
+              <p class="text-slate-700 text-xs leading-snug"><strong class="text-slate-800">Hallucinations</strong> reach customers as facts</p>
+            </div>
+            <div class="flex items-start gap-1.5">
+              <span class="text-red-400 font-black flex-shrink-0 text-sm leading-tight mt-0.5">—</span>
+              <p class="text-slate-700 text-xs leading-snug"><strong class="text-slate-800">AI drift</strong> goes undetected for months</p>
+            </div>
+            <div class="flex items-start gap-1.5">
+              <span class="text-red-400 font-black flex-shrink-0 text-sm leading-tight mt-0.5">—</span>
+              <p class="text-slate-700 text-xs leading-snug"><strong class="text-slate-800">Unsafe outputs</strong> bypass compliance controls</p>
+            </div>
+            <div class="flex items-start gap-1.5">
+              <span class="text-red-400 font-black flex-shrink-0 text-sm leading-tight mt-0.5">—</span>
+              <p class="text-slate-700 text-xs leading-snug"><strong class="text-slate-800">Model contradictions</strong> erode trust silently</p>
+            </div>
+          </div>
         </div>
-        <div class="border-l-4 pl-4 relative" style="border-color:#1e40af;">
-          <h2 class="text-sm font-semibold uppercase tracking-wide mb-1" style="color:#1e40af;">The Solution</h2>
-          <p class="text-slate-700 leading-relaxed text-sm">Traditional cybersecurity treats AI as a black box. Enterprises lack visibility into model behavior, consensus, and governance decisions. One corrupted model or undetected drift can compromise entire security postures. Without real-time drift detection and multi-model validation, companies face data breaches, compliance violations, and operational blind spots.</p>
+
+        <!-- Solution zone -->
+        <div class="bg-slate-900 rounded-2xl p-5 flex-1">
+          <p class="text-cyan-400 text-xs font-bold tracking-widest uppercase mb-2">The Solution</p>
+          <p class="text-slate-300 text-xs leading-relaxed mb-3">
+            ISI Platform is the independent governance judge that sits above every AI model a business runs. It cannot be influenced by the models it monitors — making every AI output provably safe, auditable, and contractually defensible.
+          </p>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-slate-800 rounded-xl p-3 text-center">
+              <p class="text-slate-300 text-xs font-bold mb-1">Offline Trinity</p>
+              <p class="text-slate-500 text-xs leading-tight">Always-on local safety backbone</p>
+            </div>
+            <div class="bg-slate-800 rounded-xl p-3 text-center">
+              <p class="text-slate-300 text-xs font-bold mb-1">Online Trinity</p>
+              <p class="text-slate-500 text-xs leading-tight">Cross-model consensus checking</p>
+            </div>
+            <div class="bg-cyan-500 rounded-xl p-3 text-center">
+              <p class="text-white text-xs font-bold mb-1">ISI Judge</p>
+              <p class="text-cyan-100 text-xs leading-tight">Independent governance arbiter</p>
+            </div>
+          </div>
         </div>
-        <div class="border-l-4 border-sky-500 pl-4 relative"><h2 class="text-sm font-semibold text-sky-600 uppercase tracking-wide mb-1">Target Audience</h2><p class="text-slate-700 leading-relaxed text-sm">Enterprise security teams, compliance officers, and security architects protecting mission-critical systems from AI-driven threats.</p></div>
-        <div class="border-l-4 border-amber-500 pl-4 relative"><h2 class="text-sm font-semibold text-amber-600 uppercase tracking-wide mb-1">Personal Motivation</h2><p class="text-slate-700 leading-relaxed text-sm">Enterprises deserve AI governance that works—transparent, accountable, and impossible to bypass. ISI makes AI security visible.</p></div>
+
       </div>
-      <div class="mt-6 flex flex-wrap gap-2"><span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-full">AI Governance</span><span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-full">Multi-Model Security</span><span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-full">Drift Detection</span><span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-full">Real-Time Threat Prevention</span><span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-full">Enterprise AI</span></div>
-      <div class="mt-8"><data-attribution /></div>
     </div>
-    <div class="sl-visual-panel relative">
-      <img src="http://localhost:8001/common/image-generation?prompt=Dark+abstract+visualization+of+AI+systems+diverging%2C+hallucinating%2C+and+failing+silently+with+no+governance+oversight&amp;keyspace=xmwouqsr&amp;user_id=4711" alt="visual" class="w-full h-full object-cover" />
-      <div class="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent opacity-40"></div>
+
+    <!-- Visual column -->
+    <div class="sl-visual relative overflow-hidden">
+      <img
+        src="https://api.qb-deck.quantumbyte.ai/common/image-generation?prompt=fragmented%20AI%20neural%20network%20with%20warning%20signals%20and%20contradictions%2C%20red%20warning%20indicators%20transitioning%20to%20ordered%20protected%20cyan%20governance%20system%2C%20dark%20corporate%20enterprise%20aesthetic%2C%20no%20text"
+        alt="AI governance gap visualization"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
     </div>
+
   </div>
 </section>
