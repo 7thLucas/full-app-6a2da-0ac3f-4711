@@ -76,7 +76,7 @@ Every governance decision is logged, timestamped, and auditable.
 
 ## Positioning Statement
 
-ISI Platform is the first AI governance cybersecurity system — built to make enterprise AI deployments provably safe, auditable, and contractually defensible. It sits above every AI model a company runs, acting as an independent judge that cannot be influenced by the models it monitors. Not an antivirus. Not a firewall. A governance engine.
+ISI Nexus is the first AI governance cybersecurity system — built to make enterprise AI deployments provably safe, auditable, and contractually defensible. It sits above every AI model a company runs, acting as an independent judge that cannot be influenced by the models it monitors. Not an antivirus. Not a firewall. A governance engine.
 
 ## Brand & Tone
 
