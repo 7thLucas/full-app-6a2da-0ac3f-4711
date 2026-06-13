@@ -1,37 +1,82 @@
 <style>
-  .mode-landscape .sl-metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
-  .mode-portrait .sl-metrics-grid { display: flex; flex-direction: column; gap: 1rem; }
+  .mode-landscape .sl-layout { flex-direction: row; }
+  .mode-portrait .sl-layout { flex-direction: column; }
+  .mode-landscape .sl-left { width: 42%; }
+  .mode-landscape .sl-right { width: 58%; }
+  .mode-portrait .sl-left { width: 100%; }
+  .mode-portrait .sl-right { width: 100%; flex: 1; }
 </style>
-<section class="w-full h-full overflow-auto bg-white p-10">
-  <div class="flex items-center gap-3 mb-2">
-    <span class="text-xs font-bold tracking-widest uppercase" style="color:#1e40af;">Outcomes</span>
-  </div>
-  <h2 class="text-4xl font-bold text-slate-900 mb-6">Quantifiable Benefits</h2>
-  <p class="text-lg text-slate-600 mb-10 max-w-3xl">ISI prevents silent AI failures before they become breaches. Real-time governance, multi-model validation, and transparent decision-making protect your business.</p>
-  <div class="sl-metrics-grid mb-12"><article class="flex-1 min-w-[200px] bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-        <h3 class="text-3xl font-bold leading-none mb-2" style="color:#1e40af;">99.7%</h3>
-        <h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">Drift Detection Accuracy</h4>
-        <p class="text-slate-600 text-sm leading-relaxed">Catch model deviation before it impacts security decisions</p>
-      </article>
-      <article class="flex-1 min-w-[200px] bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-        <h3 class="text-3xl font-bold leading-none mb-2" style="color:#1e40af;">Real-Time</h3>
-        <h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">Multi-Model Consensus</h4>
-        <p class="text-slate-600 text-sm leading-relaxed">Validate decisions across three independent AI models instantly</p>
-      </article>
-      <article class="flex-1 min-w-[200px] bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-        <h3 class="text-3xl font-bold leading-none mb-2" style="color:#1e40af;">100%</h3>
-        <h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">Decision Transparency</h4>
-        <p class="text-slate-600 text-sm leading-relaxed">Every governance action is logged, auditable, and explainable</p>
-      </article></div>
-  <div class="rounded-2xl p-8" style="background-color:#0ea5e9;">
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-      <div class="flex-1">
-        <h3 class="text-sm font-bold uppercase tracking-widest text-white/70 mb-2">Primary ROI</h3>
-        <p class="text-4xl font-black text-white">$2.4M</p>
+
+<section class="w-full h-full overflow-auto bg-slate-950">
+  <div class="w-full h-full flex sl-layout">
+
+    <!-- Left: framing + anchor stat -->
+    <div class="sl-left p-10 flex flex-col justify-between">
+
+      <div>
+        <p class="text-red-400 text-xs font-bold tracking-widest uppercase mb-1.5">The Cost of No Governance</p>
+        <h2 class="text-white font-black leading-tight" style="font-size:1.75rem">Why $2.4M is the<br><span class="text-cyan-400">floor,</span><br>not the ceiling.</h2>
       </div>
-      <div class="flex-[2] text-white/90 text-xl leading-relaxed font-medium border-l-0 md:border-l border-white/20 md:pl-8">
-        Average cost of undetected AI system failure + regulatory fines + incident response
+
+      <div class="space-y-4">
+        <p class="text-slate-400 text-xs leading-relaxed">
+          Every enterprise running AI without a governance layer is operating blind. When a model hallucinates in a financial decision, drifts from its safety baseline, or executes an unauthorized action — the damage is not a log entry. It is regulatory fines, incident response, and reputational cost.
+        </p>
+        <p class="text-slate-400 text-xs leading-relaxed">
+          ISI does not just prevent that damage. It produces the audit trail that makes enterprise AI contractually defensible.
+        </p>
       </div>
+
+      <div class="bg-slate-800 rounded-2xl p-5">
+        <p class="text-slate-400 text-xs mb-1.5">Average cost of a single undetected AI governance failure</p>
+        <p class="text-cyan-400 font-black leading-none" style="font-size:2.5rem">$2.4M</p>
+        <p class="text-slate-500 text-xs mt-1.5">Incident response + regulatory fines + reputational damage</p>
+      </div>
+
     </div>
+
+    <!-- Right: four failure modes ISI governs -->
+    <div class="sl-right p-10 pl-4 flex flex-col justify-center gap-3">
+
+      <p class="text-slate-500 text-xs font-bold tracking-widest uppercase mb-1">Four silent failure modes — all governed by ISI</p>
+
+      <div class="grid grid-cols-2 gap-3">
+
+        <div class="bg-slate-900 border border-red-900/40 rounded-2xl p-5">
+          <div class="flex items-center gap-2 mb-2.5">
+            <div class="w-2 h-2 rounded-full bg-red-400 flex-shrink-0"></div>
+            <p class="text-red-400 text-xs font-bold tracking-wide uppercase">AI Drift</p>
+          </div>
+          <p class="text-slate-300 text-xs leading-relaxed">Model behavior changes silently over time. Decisions that were safe last quarter become unreliable — with no alert, no record, no accountability.</p>
+        </div>
+
+        <div class="bg-slate-900 border border-red-900/40 rounded-2xl p-5">
+          <div class="flex items-center gap-2 mb-2.5">
+            <div class="w-2 h-2 rounded-full bg-red-400 flex-shrink-0"></div>
+            <p class="text-red-400 text-xs font-bold tracking-wide uppercase">Hallucinations</p>
+          </div>
+          <p class="text-slate-300 text-xs leading-relaxed">Fabricated outputs delivered as fact. Without cross-model validation, these reach customers, contracts, and compliance reports unchallenged.</p>
+        </div>
+
+        <div class="bg-slate-900 border border-red-900/40 rounded-2xl p-5">
+          <div class="flex items-center gap-2 mb-2.5">
+            <div class="w-2 h-2 rounded-full bg-red-400 flex-shrink-0"></div>
+            <p class="text-red-400 text-xs font-bold tracking-wide uppercase">Unsafe Outputs</p>
+          </div>
+          <p class="text-slate-300 text-xs leading-relaxed">Outputs that breach safety constraints or compliance rules. No frontier model's native guardrails catch every edge case — ISI does.</p>
+        </div>
+
+        <div class="bg-cyan-500 rounded-2xl p-5">
+          <div class="flex items-center gap-2 mb-2.5">
+            <div class="w-2 h-2 rounded-full bg-white/60 flex-shrink-0"></div>
+            <p class="text-cyan-100 text-xs font-bold tracking-wide uppercase">ISI Governs All</p>
+          </div>
+          <p class="text-white text-xs leading-relaxed">One governance layer above every model. Every output evaluated. Every decision logged. Zero silent failures.</p>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 </section>
