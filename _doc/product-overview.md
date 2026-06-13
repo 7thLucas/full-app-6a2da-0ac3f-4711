@@ -1,10 +1,10 @@
-# ISI Platform — Product Overview
+# ISI Nexus — Product Overview
 
 ## What It Is
 
-ISI Platform is the world's first multi-model AI governance and threat-prevention engine packaged as a commercial SaaS product. It is the business layer that showcases, sells, licenses, and operationally deploys a three-layer AI safety architecture built by its creator.
+ISI Nexus is the world's first multi-model AI governance and threat-prevention engine packaged as a commercial SaaS product. It is the business layer that showcases, sells, licenses, and operationally deploys a three-layer AI safety architecture built by its creator.
 
-Unlike antivirus or firewall solutions that protect networks, ISI Platform governs AI model behavior itself — detecting hallucinations, model drift, unsafe outputs, multi-model contradictions, data corruption, and unauthorized actions before they cause damage.
+Unlike antivirus or firewall solutions that protect networks, ISI Nexus governs AI model behavior itself — detecting hallucinations, model drift, unsafe outputs, multi-model contradictions, data corruption, and unauthorized actions before they cause damage.
 
 The platform serves two roles simultaneously:
 
