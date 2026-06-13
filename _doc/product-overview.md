@@ -56,6 +56,8 @@ Every governance decision is logged, timestamped, and auditable.
 
 10. **"Why This System Is Worth Millions" Section** — Narrative section educating buyers on the scale of risk ISI prevents, anchored in enterprise AI failure costs and governance gap analysis.
 
+11. **Governance Audit Tool** — Live AI output evaluation endpoint (`/governance-audit`). Any user can submit an AI output and receive an instant ISI verdict: verdict (approved/flagged/blocked), compliance score, severity rating, assessment, and recommended action. Functions as a live product demonstration and pre-sales proof-of-value tool.
+
 ## Revenue Model
 
 | Stream | Mechanism | Target Buyer |
