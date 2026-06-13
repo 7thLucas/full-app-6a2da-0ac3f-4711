@@ -1,0 +1,112 @@
+<style>
+  .mode-landscape .sl-layout { flex-direction: row; }
+  .mode-portrait .sl-layout { flex-direction: column; }
+  .mode-landscape .sl-title { width: 34%; }
+  .mode-landscape .sl-diagram { width: 66%; }
+  .mode-portrait .sl-title { width: 100%; }
+  .mode-portrait .sl-diagram { width: 100%; flex: 1; }
+</style>
+
+<section class="w-full h-full overflow-auto bg-white">
+  <div class="w-full h-full flex sl-layout">
+
+    <!-- Title column (dark) -->
+    <div class="sl-title bg-slate-950 p-10 flex flex-col justify-between">
+      <div>
+        <span class="text-cyan-400 text-xs font-bold tracking-widest uppercase">Architecture</span>
+      </div>
+      <div>
+        <h2 class="text-white font-black leading-tight mb-4" style="font-size:1.75rem">Three Layers.<br><span class="text-cyan-400">One</span><br>Independent<br>Judge.</h2>
+        <p class="text-slate-400 text-xs leading-relaxed">Every AI output passes through three independent evaluation layers before it is trusted. ISI Governance sits above all of them — unable to be influenced by the models it monitors.</p>
+      </div>
+      <div class="space-y-2.5">
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></div>
+          <p class="text-slate-400 text-xs">Model-agnostic governance</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></div>
+          <p class="text-slate-400 text-xs">Offline-first safety backbone</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></div>
+          <p class="text-slate-400 text-xs">Every decision is auditable</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diagram column -->
+    <div class="sl-diagram p-10 flex flex-col justify-center gap-2.5">
+
+      <!-- Layer 3: ISI Governance (top, highlighted) -->
+      <div class="bg-cyan-500 rounded-2xl p-5">
+        <div class="flex items-start justify-between mb-2.5">
+          <div>
+            <p class="text-cyan-100 text-xs font-bold tracking-widest uppercase mb-0.5">Layer 3 — The Judge</p>
+            <p class="text-white font-black" style="font-size:1.1rem">ISI Governance Layer</p>
+          </div>
+          <span class="bg-white/25 text-white text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0">Active</span>
+        </div>
+        <p class="text-cyan-100 text-xs leading-relaxed mb-3">Sits above both trinities. Evaluates all outputs. Makes enforcement decisions. Cannot be influenced by the models it monitors.</p>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="bg-white/20 text-white text-xs px-2.5 py-1 rounded-full">Drift Detection</span>
+          <span class="bg-white/20 text-white text-xs px-2.5 py-1 rounded-full">Hallucination Guard</span>
+          <span class="bg-white/20 text-white text-xs px-2.5 py-1 rounded-full">Unsafe Action Block</span>
+          <span class="bg-white/20 text-white text-xs px-2.5 py-1 rounded-full">Audit Log</span>
+          <span class="bg-white/20 text-white text-xs px-2.5 py-1 rounded-full">Corruption Detection</span>
+        </div>
+      </div>
+
+      <!-- Connector -->
+      <div class="flex justify-center">
+        <div class="flex flex-col items-center gap-0.5">
+          <div class="w-px h-3 bg-slate-300"></div>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <!-- Layer 2: Online Trinity -->
+      <div class="bg-slate-800 rounded-2xl p-5">
+        <div class="flex items-start justify-between mb-2.5">
+          <div>
+            <p class="text-slate-400 text-xs font-bold tracking-widest uppercase mb-0.5">Layer 2</p>
+            <p class="text-white font-black" style="font-size:1.1rem">Online Trinity</p>
+          </div>
+          <span class="bg-slate-700 text-slate-300 text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0">Customer API Keys</span>
+        </div>
+        <p class="text-slate-400 text-xs leading-relaxed mb-3">Orchestrates Gemini, Claude, and ChatGPT simultaneously. Cross-checks outputs for contradictions and surfaces inter-model disagreements in real time.</p>
+        <div class="flex gap-2">
+          <span class="bg-blue-500/20 text-blue-300 text-xs px-2.5 py-1 rounded-full border border-blue-500/30">Gemini</span>
+          <span class="bg-orange-500/20 text-orange-300 text-xs px-2.5 py-1 rounded-full border border-orange-500/30">Claude</span>
+          <span class="bg-emerald-500/20 text-emerald-300 text-xs px-2.5 py-1 rounded-full border border-emerald-500/30">ChatGPT</span>
+        </div>
+      </div>
+
+      <!-- Connector -->
+      <div class="flex justify-center">
+        <div class="flex flex-col items-center gap-0.5">
+          <div class="w-px h-3 bg-slate-300"></div>
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <!-- Layer 1: Offline Trinity -->
+      <div class="bg-slate-100 rounded-2xl p-5 border border-slate-200">
+        <div class="flex items-start justify-between mb-2.5">
+          <div>
+            <p class="text-slate-500 text-xs font-bold tracking-widest uppercase mb-0.5">Layer 1 — Foundation</p>
+            <p class="text-slate-900 font-black" style="font-size:1.1rem">Offline Trinity</p>
+          </div>
+          <span class="bg-slate-200 text-slate-600 text-xs font-semibold px-2.5 py-1 rounded-full flex-shrink-0">Always-On</span>
+        </div>
+        <p class="text-slate-600 text-xs leading-relaxed mb-3">Local AI models on-premises. Handles reasoning, safety evaluation, and logic validation. Zero internet dependency — operates in air-gapped environments.</p>
+        <div class="flex gap-2">
+          <span class="bg-slate-200 text-slate-700 text-xs px-2.5 py-1 rounded-full">Reasoning</span>
+          <span class="bg-slate-200 text-slate-700 text-xs px-2.5 py-1 rounded-full">Safety</span>
+          <span class="bg-slate-200 text-slate-700 text-xs px-2.5 py-1 rounded-full">Logic Validation</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
