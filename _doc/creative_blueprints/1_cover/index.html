@@ -1,39 +1,67 @@
 <style>
-  .mode-landscape .sl-cover-layout { display: flex; flex-direction: row; align-items: stretch; min-height: 100%; }
-  .mode-landscape .sl-content-panel { width: 55%; display: flex; flex-direction: column; justify-content: center; }
-  .mode-landscape .sl-image-panel { width: 45%; min-height: 0; }
-  .mode-portrait .sl-cover-layout { display: flex; flex-direction: column; min-height: 100%; }
-  .mode-portrait .sl-content-panel { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 1.5rem; }
-  .mode-portrait .sl-image-panel { min-height: 280px; flex-shrink: 0; }
+  .mode-landscape .sl-layout { flex-direction: row; }
+  .mode-portrait .sl-layout { flex-direction: column; }
+  .mode-landscape .sl-left { width: 52%; }
+  .mode-landscape .sl-right { width: 48%; }
+  .mode-portrait .sl-left { width: 100%; flex: 1; }
+  .mode-portrait .sl-right { display: none; }
 </style>
-<section class="w-full h-full overflow-auto bg-white">
-  <div class="sl-cover-layout h-full">
-    <div class="sl-content-panel px-10 py-12">
-      <div class="flex flex-col justify-between h-full">
-        <div>
-          <p class="text-sm font-medium tracking-widest uppercase mb-6" style="color:#1e40af;">Enterprise Security Operations Manager</p>
-          <h1 class="text-5xl font-bold text-slate-900 leading-tight mb-6">ISI Governance: AI Security Without the Risk</h1>
-          <p class="text-xl text-slate-600 leading-relaxed max-w-md mb-6">Enterprise-grade AI governance engine that detects drift, prevents hallucinations, and validates multi-model consensus in real time.</p>
-          <div class="inline-flex items-center gap-3 border rounded-lg px-4 py-3" style="background-color:#0ea5e9; border-color:#1e40af40;">
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background-color:#1e40af;">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-              </svg>
-            </div>
-            <span class="text-sm font-medium px-1" style="color:#ffffff;">Core vision: Simplified productivity</span>
 
-          </div>
+<section class="w-full h-full overflow-auto bg-white">
+  <div class="w-full h-full bg-slate-950 flex sl-layout">
+
+    <!-- Left: content -->
+    <div class="sl-left flex flex-col justify-between p-12">
+
+      <!-- Logo mark -->
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-cyan-500 flex items-center justify-center flex-shrink-0">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M9 2L15.5 5.5V12.5L9 16L2.5 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M9 7V11M7 9H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
         </div>
-        <div class="mt-auto pt-8">
-          <data-attribution />
+        <span class="text-slate-300 text-xs font-bold tracking-widest uppercase">ISI Platform</span>
+      </div>
+
+      <!-- Main headline -->
+      <div>
+        <div class="inline-flex items-center gap-2 border border-cyan-500/40 bg-cyan-500/10 rounded-full px-3 py-1 mb-7">
+          <div class="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0"></div>
+          <span class="text-cyan-400 text-xs font-semibold tracking-widest uppercase">World's First</span>
+        </div>
+        <h1 class="text-white font-black leading-none mb-1.5" style="font-size:2.75rem">AI Governance</h1>
+        <h1 class="text-cyan-400 font-black leading-none mb-1.5" style="font-size:2.75rem">Cybersecurity</h1>
+        <h1 class="text-white font-black leading-none mb-7" style="font-size:2.75rem">System</h1>
+        <p class="text-slate-400 text-sm leading-relaxed" style="max-width:300px">Three AI layers, one independent judge. Governs every model your business runs — detecting drift, hallucinations, and unsafe actions before they become enterprise incidents.</p>
+      </div>
+
+      <!-- Bottom: attribution + badges -->
+      <div class="space-y-3">
+        <data-attribution />
+        <div class="flex gap-5">
+          <span class="text-slate-500 text-xs flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span>Multi-Model
+          </span>
+          <span class="text-slate-500 text-xs flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span>Enterprise-Ready
+          </span>
+          <span class="text-slate-500 text-xs flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></span>Fully Auditable
+          </span>
         </div>
       </div>
     </div>
-    <div class="sl-image-panel relative overflow-hidden">
-      <div class="absolute inset-0" style="background:linear-gradient(135deg, #1e40af, #1e40af20);"></div>
-      <div class="absolute inset-0 flex items-center justify-center p-8">
-        <img src="http://localhost:8001/common/image-generation?prompt=Enterprise+cybersecurity+operations+center+with+multi-model+AI+governance+dashboard+showing+threat+detection+and+real-time+model+consensus+validation&amp;keyspace=xmwouqsr&amp;user_id=4711" alt="cover" class="max-w-full max-h-full object-contain drop-shadow-2xl rounded-2xl" />
-      </div>
+
+    <!-- Right: image -->
+    <div class="sl-right relative overflow-hidden">
+      <img
+        src="https://api.qb-deck.quantumbyte.ai/common/image-generation?prompt=abstract%20AI%20governance%20neural%20network%20three%20interconnected%20glowing%20layers%2C%20dark%20navy%20background%2C%20cyan%20and%20electric%20blue%20node%20pathways%2C%20enterprise%20cybersecurity%20system%2C%20hexagonal%20grid%20pattern%2C%20cinematic%20render%2C%20no%20text"
+        alt="ISI Platform — three-layer governance architecture"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/20 to-transparent"></div>
     </div>
+
   </div>
 </section>
