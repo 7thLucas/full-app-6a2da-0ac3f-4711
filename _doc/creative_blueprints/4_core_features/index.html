@@ -1,0 +1,99 @@
+<style>
+  .mode-landscape .sl-layout { flex-direction: row; }
+  .mode-portrait .sl-layout { flex-direction: column; }
+  .mode-landscape .sl-sidebar { width: 28%; }
+  .mode-landscape .sl-grid { width: 72%; }
+  .mode-portrait .sl-sidebar { width: 100%; }
+  .mode-portrait .sl-grid { width: 100%; flex: 1; }
+</style>
+
+<section class="w-full h-full overflow-auto bg-slate-50">
+  <div class="w-full h-full flex sl-layout">
+
+    <!-- Sidebar: title + persona chips -->
+    <div class="sl-sidebar p-10 flex flex-col gap-6">
+      <div>
+        <p class="text-cyan-600 text-xs font-bold tracking-widest uppercase mb-2">Platform Capabilities</p>
+        <h2 class="text-slate-900 font-black leading-tight" style="font-size:1.5rem">Built for every stakeholder in the room.</h2>
+      </div>
+      <div>
+        <p class="text-slate-400 text-xs font-semibold uppercase tracking-wide mb-2.5">Viewing as</p>
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2.5 bg-slate-900 rounded-xl px-3 py-2.5">
+            <div class="w-2 h-2 rounded-full bg-cyan-400 flex-shrink-0"></div>
+            <span class="text-white text-sm font-semibold">CISO</span>
+            <span class="ml-auto bg-cyan-500 text-white text-xs px-2 py-0.5 rounded-full">Active</span>
+          </div>
+          <div class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3 py-2.5">
+            <div class="w-2 h-2 rounded-full bg-slate-300 flex-shrink-0"></div>
+            <span class="text-slate-600 text-sm font-medium">CTO</span>
+          </div>
+          <div class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3 py-2.5">
+            <div class="w-2 h-2 rounded-full bg-slate-300 flex-shrink-0"></div>
+            <span class="text-slate-600 text-sm font-medium">Compliance Officer</span>
+          </div>
+          <div class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3 py-2.5">
+            <div class="w-2 h-2 rounded-full bg-slate-300 flex-shrink-0"></div>
+            <span class="text-slate-600 text-sm font-medium">Enterprise Buyer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature grid -->
+    <div class="sl-grid p-10 pl-0 flex flex-col justify-center">
+      <div class="grid grid-cols-3 gap-3">
+
+        <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+          <div class="w-9 h-9 rounded-xl bg-red-50 flex items-center justify-center mb-3">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L15.5 5.5V12.5L9 16L2.5 12.5V5.5L9 2Z" stroke="#ef4444" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 6.5V9.5" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="12" r="0.75" fill="#ef4444"/></svg>
+          </div>
+          <h3 class="text-slate-900 text-sm font-bold mb-1">Live Threat Dashboard</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">Real-time threat detections, drift events, and governance decisions across your entire AI deployment.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+          <div class="w-9 h-9 rounded-xl bg-amber-50 flex items-center justify-center mb-3">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 3L16 9L9 15" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9H15" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="text-slate-900 text-sm font-bold mb-1">AI Drift Prevention</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">Baseline behavioral profiles per model. Instant alerts when any model deviates from approved behavior.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+          <div class="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center mb-3">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.5" stroke="#3b82f6" stroke-width="1.5"/><path d="M9 6V9.5L11 11.5" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="text-slate-900 text-sm font-bold mb-1">Hallucination Guard</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">Cross-validates outputs across all three frontier models. Flags unverifiable claims before they reach users.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+          <div class="w-9 h-9 rounded-xl bg-purple-50 flex items-center justify-center mb-3">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2.5" y="2.5" width="13" height="13" rx="2" stroke="#7c3aed" stroke-width="1.5"/><path d="M5 7H13M5 10H9" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="text-slate-900 text-sm font-bold mb-1">Governance Decision Log</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">Every ISI decision logged and timestamped. Board-ready audit trail for compliance and regulatory review.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+          <div class="w-9 h-9 rounded-xl bg-green-50 flex items-center justify-center mb-3">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2.5" y="5.5" width="13" height="9" rx="1.5" stroke="#10b981" stroke-width="1.5"/><path d="M6 5.5V4C6 3.17 6.67 2.5 7.5 2.5H10.5C11.33 2.5 12 3.17 12 4V5.5" stroke="#10b981" stroke-width="1.5"/><path d="M9 9.5V11.5M8 10.5H10" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="text-slate-900 text-sm font-bold mb-1">Unauthorized Action Block</h3>
+          <p class="text-slate-500 text-xs leading-relaxed">Permission-aware enforcement. Blocks any AI output that exceeds the role or scope granted to that model.</p>
+        </div>
+
+        <div class="bg-slate-900 rounded-2xl p-5">
+          <div class="w-9 h-9 rounded-xl bg-cyan-500/20 flex items-center justify-center mb-3">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 13L6.5 9.5L9 12L13 7L16 10" stroke="#22d3ee" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="text-white text-sm font-bold mb-1">Multi-Model Alerts</h3>
+          <p class="text-slate-400 text-xs leading-relaxed">Surfaces disagreements between Gemini, Claude, and ChatGPT in real time. Contradiction = unreliability signal.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
