@@ -1,43 +1,94 @@
 <style>
-  .mode-landscape .sl-features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-  .mode-portrait .sl-features-grid { display: flex; flex-direction: column; gap: 1rem; }
+  .mode-landscape .sl-layout { flex-direction: row; }
+  .mode-portrait .sl-layout { flex-direction: column; }
+  .mode-landscape .sl-intro { width: 36%; }
+  .mode-landscape .sl-steps { width: 64%; }
+  .mode-portrait .sl-intro { width: 100%; }
+  .mode-portrait .sl-steps { width: 100%; flex: 1; }
 </style>
-<section class="w-full h-full overflow-auto bg-white p-10">
-  <div class="flex items-center justify-between mb-2">
-    <p class="text-xs font-semibold tracking-widest uppercase" style="color:#1e40af;">Core Capabilities</p>
-    <div class="flex items-center gap-1.5 px-2.5 py-1 border rounded-full" style="background-color:#1e40af; border-color:#1e40af30;">
-      <span class="text-xs font-semibold" style="color:#ffffff;">Enabled</span>
+
+<section class="w-full h-full overflow-auto bg-white">
+  <div class="w-full h-full flex sl-layout">
+
+    <!-- Intro column (dark) -->
+    <div class="sl-intro bg-slate-950 p-10 flex flex-col justify-between">
+
+      <div>
+        <p class="text-cyan-400 text-xs font-bold tracking-widest uppercase mb-1.5">Plain Language</p>
+        <h2 class="text-white font-black leading-tight" style="font-size:1.5rem">What ISI<br>actually does —<br>for the executive.</h2>
+      </div>
+
+      <p class="text-slate-400 text-xs leading-relaxed">
+        You do not need to understand the models. Every business running AI for operations, customer service, or decisions is exposed. ISI sits in the middle and checks every output before it reaches the real world. Four steps. No AI expertise required.
+      </p>
+
+      <div class="space-y-2.5">
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></div>
+          <p class="text-slate-400 text-xs">Sits above your existing AI stack</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></div>
+          <p class="text-slate-400 text-xs">No change to how your team works</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-cyan-500 flex-shrink-0"></div>
+          <p class="text-slate-400 text-xs">Produces an audit trail every regulator understands</p>
+        </div>
+      </div>
+
     </div>
-  </div>
-  <h1 class="text-3xl font-bold text-slate-900 mb-4 leading-tight">Effortless Product Experience</h1>
-  <p class="text-slate-600 text-lg mb-8 max-w-2xl">Intuitive features designed for seamless adoption and long-term value delivery.</p>
-  <div class="sl-features-grid">
-    <div class="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center flex-shrink-0">
-               <span class="text-xl">✨</span>
-            </div>
-            <h3 class="font-bold text-slate-900 text-base">Deploy in Minutes</h3>
+
+    <!-- Four-step flow -->
+    <div class="sl-steps p-10 flex flex-col justify-center gap-3">
+
+      <p class="text-slate-500 text-xs font-bold tracking-widest uppercase mb-1">How it works</p>
+
+      <div class="flex flex-col gap-3">
+
+        <div class="flex items-start gap-4 bg-slate-50 border border-slate-100 rounded-2xl p-5">
+          <div class="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0">
+            <span class="text-white text-sm font-black">1</span>
           </div>
-          <p class="text-slate-600 text-sm leading-relaxed">Offline Trinity runs locally. Provide your own API keys for Online Trinity. ISI Governance Layer auto-activates. No vendor lock-in, full transparency, enterprise control.</p>
-        </div>
-        <div class="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center flex-shrink-0">
-               <span class="text-xl">✨</span>
-            </div>
-            <h3 class="font-bold text-slate-900 text-base">Real-Time Dashboard</h3>
+          <div>
+            <p class="text-slate-900 text-sm font-bold mb-1">Your AI tools run as normal</p>
+            <p class="text-slate-500 text-xs leading-relaxed">Gemini, Claude, and ChatGPT receive your business requests using your own API keys. Nothing changes in how your team works.</p>
           </div>
-          <p class="text-slate-600 text-sm leading-relaxed">Monitor threat detections, AI drift alerts, model-to-model disagreement, and governance decisions. Every action is auditable. Every decision is explainable.</p>
         </div>
-        <div class="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center flex-shrink-0">
-               <span class="text-xl">✨</span>
-            </div>
-            <h3 class="font-bold text-slate-900 text-base">Scale with Confidence</h3>
+
+        <div class="flex items-start gap-4 bg-slate-50 border border-slate-100 rounded-2xl p-5">
+          <div class="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0">
+            <span class="text-white text-sm font-black">2</span>
           </div>
-          <p class="text-slate-600 text-sm leading-relaxed">Per-seat pricing, flexible licensing, and enterprise contracts. White-label options for partners. Monthly and annual subscriptions. Pay for what you use, govern everything.</p>
+          <div>
+            <p class="text-slate-900 text-sm font-bold mb-1">ISI intercepts every output</p>
+            <p class="text-slate-500 text-xs leading-relaxed">Before any AI response reaches a user or a business system, the governance layer evaluates it across all three models and the local Offline Trinity safety engine.</p>
+          </div>
         </div>
+
+        <div class="flex items-start gap-4 bg-slate-50 border border-slate-100 rounded-2xl p-5">
+          <div class="w-9 h-9 rounded-full bg-cyan-500 flex items-center justify-center flex-shrink-0">
+            <span class="text-white text-sm font-black">3</span>
+          </div>
+          <div>
+            <p class="text-slate-900 text-sm font-bold mb-1">The judge decides — approve, flag, or block</p>
+            <p class="text-slate-500 text-xs leading-relaxed">ISI issues a governance ruling with a logged reason. Drift, hallucinations, model contradictions, and unsafe actions are caught and enforced here — not reported after the fact.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-slate-900 rounded-2xl p-5">
+          <div class="w-9 h-9 rounded-full bg-cyan-500 flex items-center justify-center flex-shrink-0">
+            <span class="text-white text-sm font-black">4</span>
+          </div>
+          <div>
+            <p class="text-white text-sm font-bold mb-1">You have a full, defensible audit trail</p>
+            <p class="text-slate-400 text-xs leading-relaxed">Every decision is timestamped, logged, and available to your compliance team, legal counsel, or board. AI governance becomes provable, not assumed.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 </section>
