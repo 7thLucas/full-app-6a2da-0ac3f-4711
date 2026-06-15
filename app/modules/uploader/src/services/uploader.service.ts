@@ -94,7 +94,10 @@ export async function getFile(imageUrl: string, res: Response): Promise<void> {
       method: "GET", url, timeout: 120_000, responseType: "stream",
       maxBodyLength: Infinity, maxContentLength: Infinity, httpsAgent,
     });
-    const contentType = response.headers["content-type"] || "application/octet-stream";
+    const rawContentType = response.headers["content-type"];
+    const contentType = (Array.isArray(rawContentType) ? rawContentType[0] : rawContentType)
+      ? String(Array.isArray(rawContentType) ? rawContentType[0] : rawContentType)
+      : "application/octet-stream";
     res.header("Content-Type", contentType);
     res.type(contentType.split(";")[0]);
     response.data.pipe(res);

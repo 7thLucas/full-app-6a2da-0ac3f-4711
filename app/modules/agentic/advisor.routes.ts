@@ -209,7 +209,8 @@ router.get("/advisor/admin/conversations", requireAdmin, async (req: Request, re
 
 router.get("/advisor/admin/conversations/:id", requireAdmin, async (req: Request, res: Response) => {
   try {
-    const convo = await adminGetConversation(req.params.id);
+    const convoId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    const convo = await adminGetConversation(convoId);
     if (!convo) {
       return res.status(404).json({ success: false, message: "Conversation not found" });
     }

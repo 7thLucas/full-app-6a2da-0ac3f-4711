@@ -129,7 +129,7 @@ router.post(
       if (systemPrompt) form.set("system_prompt", systemPrompt);
 
       for (const file of files) {
-        const blob = new Blob([file.buffer], {
+        const blob = new Blob([new Uint8Array(file.buffer)], {
           type: file.mimetype || "application/octet-stream",
         });
         form.append("files", blob, file.originalname || "file");
