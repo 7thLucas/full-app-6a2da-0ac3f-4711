@@ -15,11 +15,35 @@ export interface AdvisorRoiView {
   roiMultiple: number;
 }
 
+export interface AdvisorConsensusTurnView {
+  round: number;
+  model: string;
+  stance: string;
+  challenge: string;
+  confidence: number;
+}
+
+export interface AdvisorConsensusView {
+  turns: AdvisorConsensusTurnView[];
+  agreementScore: number;
+  rounds: number;
+  converged: boolean;
+}
+
+export interface AdvisorPriceRecommendationView {
+  anchorTier: string;
+  rangeLowUsd: number;
+  rangeHighUsd: number;
+  rationale: string;
+}
+
 export interface AdvisorMessageView {
   role: "user" | "assistant" | "system";
   content: string;
   modelsConsulted?: AdvisorModelConsultationView[];
   agreementNote?: string;
+  consensus?: AdvisorConsensusView;
+  priceRecommendation?: AdvisorPriceRecommendationView | null;
   roi?: AdvisorRoiView | null;
   createdAt: string;
 }
@@ -80,8 +104,16 @@ export async function fetchSession(): Promise<{
 export async function saveContext(
   conversationId: string,
   input: BuyerContextInput,
-): Promise<{ conversation: AdvisorConversationView; roi: AdvisorRoiView | null }> {
-  const res = await apiRequest<{ conversation: AdvisorConversationView; roi: AdvisorRoiView | null }>(
+): Promise<{
+  conversation: AdvisorConversationView;
+  roi: AdvisorRoiView | null;
+  priceRecommendation?: AdvisorPriceRecommendationView | null;
+}> {
+  const res = await apiRequest<{
+    conversation: AdvisorConversationView;
+    roi: AdvisorRoiView | null;
+    priceRecommendation?: AdvisorPriceRecommendationView | null;
+  }>(
     "/api/advisor/context",
     {
       method: "POST",

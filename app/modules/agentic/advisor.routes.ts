@@ -19,7 +19,12 @@ import { createLogger } from "~/lib/logger";
 import { requireAuth, requireAdmin } from "~/modules/authentication/authentication.middleware";
 import { UserRole } from "~/modules/authentication/authentication.types";
 import { AdvisorConversationModel } from "./advisor/advisor.model";
-import { orchestrateTurn, targetDealUsd, computeRoi } from "./advisor/advisor.orchestrator";
+import {
+  orchestrateTurn,
+  targetDealUsd,
+  computeRoi,
+  computePriceRecommendation,
+} from "./advisor/advisor.orchestrator";
 import {
   adminGetConversation,
   adminListConversations,
@@ -98,11 +103,13 @@ router.post("/advisor/context", ...buyerGate, async (req: Request, res: Response
       industry: req.body?.industry,
       currentTools: req.body?.currentTools,
     });
+    const ctxRoi = computeRoi(updated.buyerContext);
     return res.json({
       success: true,
       data: {
         conversation: updated.toObject(),
-        roi: computeRoi(updated.buyerContext),
+        roi: ctxRoi,
+        priceRecommendation: computePriceRecommendation(updated.buyerContext, ctxRoi),
       },
     });
   } catch (err) {
@@ -154,6 +161,8 @@ router.post("/advisor/message", ...buyerGate, async (req: Request, res: Response
       content: result.reply,
       modelsConsulted: result.modelsConsulted,
       agreementNote: result.agreementNote,
+      consensus: result.consensus,
+      priceRecommendation: result.priceRecommendation,
       roi: result.roi,
       createdAt: new Date(),
     };

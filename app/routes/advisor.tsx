@@ -5,6 +5,7 @@ import { Shield } from "lucide-react";
 import { getUserFromRequest } from "~/modules/authentication/authentication.server";
 import { AuthService } from "~/modules/authentication/authentication.service";
 import { AdvisorChat } from "~/modules/agentic/advisor/components/advisor-chat";
+import { ConsoleIntro } from "~/modules/agentic/advisor/components/console-intro";
 
 // ─── Server: auth + subscription gating ──────────────────────────────────────
 
@@ -25,18 +26,21 @@ export async function loader({ request }: LoaderFunctionArgs) {
     }
   }
 
-  return { email: jwtUser.email };
+  // Optional owner-supplied presenter video for the console intro.
+  const presenterVideoUrl = process.env.ISI_ADVISOR_VIDEO_URL || null;
+
+  return { email: jwtUser.email, presenterVideoUrl };
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// ─── Page: video-led enterprise security console (not a chatbot) ─────────────
 
 export default function AdvisorPage() {
-  const { email } = useLoaderData<typeof loader>();
+  const { email, presenterVideoUrl } = useLoaderData<typeof loader>();
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       {/* Nav */}
-      <div className="sticky top-0 z-40 flex items-center justify-between border-b border-slate-800 bg-slate-900 px-6 py-4">
+      <div className="sticky top-0 z-40 flex items-center justify-between border-b border-slate-800 bg-slate-900/90 px-6 py-4 backdrop-blur">
         <div className="flex items-center gap-4">
           <Link to="/" className="flex items-center gap-2">
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-cyan-500">
@@ -45,7 +49,7 @@ export default function AdvisorPage() {
             <span className="font-black text-white">ISI Nexus</span>
           </Link>
           <span className="text-slate-600">/</span>
-          <span className="text-sm text-slate-400">Sales Advisor</span>
+          <span className="text-sm text-slate-400">Security Console</span>
         </div>
         <div className="flex items-center gap-3">
           <span className="hidden text-xs text-slate-500 md:block">{email}</span>
@@ -58,15 +62,19 @@ export default function AdvisorPage() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-4xl px-6 py-6">
+      <div className="mx-auto max-w-6xl px-6 py-6">
         <div className="mb-5">
-          <h1 className="text-2xl font-black text-white">The ISI Sales Advisor</h1>
-          <p className="mt-1 text-sm text-slate-400">
-            A live demonstration of multi-model orchestration. Every question is consulted across the
-            Online Trinity and resolved into one governed recommendation, with ROI computed from your
-            own numbers.
+          <h1 className="text-2xl font-black text-white">ISI Nexus Governance Console</h1>
+          <p className="mt-1 max-w-2xl text-sm text-slate-400">
+            A live, video-led briefing where multiple AI models check and challenge each other in
+            real time — and the ISI Judge ratifies one governed answer your board can defend.
           </p>
         </div>
+
+        <div className="mb-6">
+          <ConsoleIntro videoUrl={presenterVideoUrl} />
+        </div>
+
         <AdvisorChat />
       </div>
     </div>

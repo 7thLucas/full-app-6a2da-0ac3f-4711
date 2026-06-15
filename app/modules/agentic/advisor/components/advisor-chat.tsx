@@ -3,11 +3,12 @@ import {
   Shield,
   Send,
   Plus,
-  Layers,
-  CheckCircle2,
-  AlertCircle,
   TrendingUp,
   Loader2,
+  Activity,
+  Lock,
+  Gauge,
+  Terminal,
 } from "lucide-react";
 import {
   fetchSession,
@@ -17,12 +18,17 @@ import {
   SubscriptionRequiredError,
   type AdvisorConversationView,
   type AdvisorMessageView,
+  type AdvisorPriceRecommendationView,
   type BuyerContextInput,
 } from "../advisor.client";
+import { CopilotCore, type CopilotState } from "./copilot-core";
+import { ConsensusTheater } from "./consensus-theater";
 
 function formatUsd(n: number): string {
   return `$${Math.round(n).toLocaleString()}`;
 }
+
+// ─── Live ROI readout (security-console styling, not a chat bubble) ──────────
 
 function RoiPanel({ roi }: { roi: NonNullable<AdvisorMessageView["roi"]> }) {
   const rows: Array<{ label: string; value: string; accent?: boolean }> = [
@@ -53,39 +59,27 @@ function RoiPanel({ roi }: { roi: NonNullable<AdvisorMessageView["roi"]> }) {
   );
 }
 
-function ModelsConsulted({ message }: { message: AdvisorMessageView }) {
-  if (!message.modelsConsulted || message.modelsConsulted.length === 0) return null;
-  const okCount = message.modelsConsulted.filter((m) => m.ok).length;
+// ─── Owner price band (gated/personalized; IP stays protected) ──────────────
+
+function PriceBand({ rec }: { rec: AdvisorPriceRecommendationView }) {
   return (
-    <div className="mt-3 border-t border-slate-800 pt-3">
+    <div className="mt-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4">
       <div className="mb-2 flex items-center gap-2">
-        <Layers className="h-3.5 w-3.5 text-slate-400" />
-        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-          {okCount} of {message.modelsConsulted.length} models consulted
+        <Lock className="h-3.5 w-3.5 text-emerald-400" />
+        <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+          Tailored engagement · {rec.anchorTier} tier
         </span>
       </div>
-      <div className="flex flex-wrap gap-1.5">
-        {message.modelsConsulted.map((m) => (
-          <span
-            key={m.model}
-            title={m.stance || undefined}
-            className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] ${
-              m.ok
-                ? "bg-emerald-500/10 text-emerald-400"
-                : "bg-slate-800 text-slate-500"
-            }`}
-          >
-            {m.ok ? <CheckCircle2 className="h-3 w-3" /> : <AlertCircle className="h-3 w-3" />}
-            {m.model}
-          </span>
-        ))}
+      <div className="text-lg font-black text-white">
+        {formatUsd(rec.rangeLowUsd)} – {formatUsd(rec.rangeHighUsd)}
+        <span className="ml-1 text-xs font-medium text-slate-400">/yr</span>
       </div>
-      {message.agreementNote && (
-        <p className="mt-2 text-[11px] italic text-slate-500">{message.agreementNote}</p>
-      )}
+      <p className="mt-1 text-[11px] leading-relaxed text-slate-400">{rec.rationale}</p>
     </div>
   );
 }
+
+// ─── Buyer context capture — framed as an intake console, not a chat ────────
 
 function ContextForm({
   initial,
@@ -104,10 +98,14 @@ function ContextForm({
     { key: "currentTools", label: "AI tools in use", placeholder: "e.g. ChatGPT, Gemini, internal copilots", type: "text" },
   ];
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
-      <h3 className="mb-1 text-lg font-black text-white">Before we begin</h3>
+    <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
+      <div className="mb-1 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-cyan-400">
+        <Terminal className="h-3.5 w-3.5" /> Threat-exposure intake
+      </div>
+      <h3 className="mb-1 text-lg font-black text-white">Calibrate the governance console to your enterprise</h3>
       <p className="mb-5 text-sm text-slate-400">
-        A few details let the advisor compute your governance ROI from your own numbers.
+        The advisor computes your governance-risk exposure and a tailored engagement from your own
+        numbers before the AIs deliberate.
       </p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {fields.map((f) => (
@@ -131,8 +129,40 @@ function ContextForm({
         className="mt-5 inline-flex items-center gap-2 rounded-lg bg-cyan-500 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-cyan-400 disabled:opacity-60"
       >
         {saving && <Loader2 className="h-4 w-4 animate-spin" />}
-        Begin advisory session
+        Initialize console
       </button>
+    </div>
+  );
+}
+
+// ─── Transcript entry rendered as a console record, not a chat bubble ───────
+
+function ConsoleEntry({ m, isLatestAssistant }: { m: AdvisorMessageView; isLatestAssistant: boolean }) {
+  if (m.role === "user") {
+    return (
+      <div className="rounded-xl border border-slate-800 bg-slate-900/40 px-4 py-3">
+        <div className="mb-1 flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+          <Terminal className="h-3 w-3" /> Operator query
+        </div>
+        <p className="whitespace-pre-wrap text-sm leading-relaxed text-slate-200">{m.content}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-xl border border-cyan-500/20 bg-gradient-to-b from-slate-900/80 to-slate-900/40 px-4 py-3">
+      <div className="mb-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-cyan-400">
+        <Shield className="h-3 w-3" /> Governed verdict
+        {m.consensus?.converged && (
+          <span className="ml-1 rounded-full bg-emerald-500/15 px-1.5 py-0.5 text-[9px] text-emerald-400">
+            {m.consensus.agreementScore}% consensus
+          </span>
+        )}
+      </div>
+      <p className="whitespace-pre-wrap text-sm leading-relaxed text-slate-100">{m.content}</p>
+      {m.consensus && <ConsensusTheater consensus={m.consensus} animate={isLatestAssistant} />}
+      {m.roi && <RoiPanel roi={m.roi} />}
+      {m.priceRecommendation && <PriceBand rec={m.priceRecommendation} />}
     </div>
   );
 }
@@ -199,7 +229,6 @@ export function AdvisorChat() {
     if (!text || !conversation || thinking) return;
     setInput("");
     setError(null);
-    // Optimistic buyer turn.
     setConversation({
       ...conversation,
       messages: [
@@ -250,111 +279,131 @@ export function AdvisorChat() {
 
   const contextCaptured = conversation.buyerContext.captured;
 
+  // Derive copilot state from the SAME consensus brain.
+  const assistantMsgs = conversation.messages.filter((m) => m.role === "assistant");
+  const lastAssistant = assistantMsgs[assistantMsgs.length - 1];
+  const copilotState: CopilotState = thinking
+    ? "deliberating"
+    : lastAssistant?.consensus?.converged
+      ? "converged"
+      : "idle";
+
+  if (!contextCaptured) {
+    return (
+      <ContextForm
+        initial={{
+          annualAiSpend: conversation.buyerContext.annualAiSpend?.toString() ?? "",
+          teamSize: conversation.buyerContext.teamSize?.toString() ?? "",
+          industry: conversation.buyerContext.industry ?? "",
+          currentTools: conversation.buyerContext.currentTools ?? "",
+        }}
+        onSubmit={handleContext}
+        saving={savingContext}
+      />
+    );
+  }
+
   return (
-    <div className="flex h-[calc(100vh-9rem)] flex-col">
-      {!contextCaptured ? (
-        <ContextForm
-          initial={{
-            annualAiSpend: conversation.buyerContext.annualAiSpend?.toString() ?? "",
-            teamSize: conversation.buyerContext.teamSize?.toString() ?? "",
-            industry: conversation.buyerContext.industry ?? "",
-            currentTools: conversation.buyerContext.currentTools ?? "",
-          }}
-          onSubmit={handleContext}
-          saving={savingContext}
-        />
-      ) : (
-        <>
-          <div className="mb-3 flex items-center justify-between">
-            <div className="flex items-center gap-2 text-xs text-slate-500">
-              <Shield className="h-3.5 w-3.5 text-cyan-400" />
-              <span className="font-semibold text-slate-300">{conversation.title}</span>
-            </div>
-            <button
-              onClick={handleNew}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-700 px-3 py-1.5 text-xs text-slate-300 transition-colors hover:border-slate-500"
-            >
-              <Plus className="h-3.5 w-3.5" /> New session
-            </button>
+    <div className="grid gap-5 lg:grid-cols-[320px_1fr]">
+      {/* ── Left rail: the 3D copilot core + live status (console, not chat) ── */}
+      <aside className="space-y-4">
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
+          <CopilotCore
+            state={copilotState}
+            agreementScore={lastAssistant?.consensus?.agreementScore}
+          />
+        </div>
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
+          <div className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            <Activity className="h-3.5 w-3.5 text-cyan-400" /> Online Trinity
           </div>
-
-          <div
-            ref={scrollRef}
-            className="flex-1 space-y-4 overflow-y-auto rounded-2xl border border-slate-800 bg-slate-900/50 p-5"
-          >
-            {conversation.messages.length === 0 && (
-              <div className="flex h-full flex-col items-center justify-center text-center">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10">
-                  <Shield className="h-6 w-6 text-cyan-400" />
-                </div>
-                <p className="max-w-md text-sm text-slate-400">
-                  The ISI Sales Advisor consults the Online Trinity — Gemini, Claude, and ChatGPT —
-                  and orchestrates one governed recommendation. Ask how ISI Nexus protects your AI
-                  deployment, or where your governance gap is.
-                </p>
-              </div>
-            )}
-
-            {conversation.messages.map((m, i) => (
-              <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-                <div
-                  className={`max-w-[85%] rounded-2xl px-4 py-3 ${
-                    m.role === "user"
-                      ? "bg-cyan-500 text-white"
-                      : "border border-slate-800 bg-slate-900 text-slate-200"
-                  }`}
-                >
-                  <p className="whitespace-pre-wrap text-sm leading-relaxed">{m.content}</p>
-                  {m.role === "assistant" && (
-                    <>
-                      {m.roi && <RoiPanel roi={m.roi} />}
-                      <ModelsConsulted message={m} />
-                    </>
-                  )}
-                </div>
+          <div className="space-y-2">
+            {["Gemini", "Claude", "ChatGPT"].map((m) => (
+              <div key={m} className="flex items-center justify-between text-xs">
+                <span className="text-slate-300">{m}</span>
+                <span className="inline-flex items-center gap-1 text-emerald-400">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> linked
+                </span>
               </div>
             ))}
-
-            {thinking && (
-              <div className="flex justify-start">
-                <div className="rounded-2xl border border-slate-800 bg-slate-900 px-4 py-3">
-                  <div className="flex items-center gap-2 text-xs text-slate-400">
-                    <Layers className="h-3.5 w-3.5 animate-pulse text-cyan-400" />
-                    Consulting the Online Trinity and orchestrating a governed reply...
-                  </div>
-                </div>
-              </div>
-            )}
+            <div className="flex items-center justify-between border-t border-slate-800 pt-2 text-xs">
+              <span className="font-semibold text-emerald-300">ISI Judge</span>
+              <span className="inline-flex items-center gap-1 text-emerald-400">
+                <Gauge className="h-3 w-3" /> adjudicating
+              </span>
+            </div>
           </div>
+        </div>
+        <button
+          onClick={handleNew}
+          className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-slate-700 px-3 py-2 text-xs text-slate-300 transition-colors hover:border-slate-500"
+        >
+          <Plus className="h-3.5 w-3.5" /> New advisory session
+        </button>
+      </aside>
 
-          {error && (
-            <div className="mt-2 text-xs text-red-400">{error}</div>
+      {/* ── Right: transcript console ── */}
+      <section className="flex h-[calc(100vh-13rem)] flex-col">
+        <div
+          ref={scrollRef}
+          className="flex-1 space-y-4 overflow-y-auto rounded-2xl border border-slate-800 bg-slate-950/60 p-5"
+        >
+          {conversation.messages.length === 0 && (
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10">
+                <Shield className="h-6 w-6 text-cyan-400" />
+              </div>
+              <p className="max-w-md text-sm text-slate-400">
+                No single AI can be trusted on its own. Ask anything — the Online Trinity will
+                challenge each other in real time and the ISI Judge will ratify one governed answer
+                you can sign off on.
+              </p>
+            </div>
           )}
 
-          <div className="mt-3 flex items-end gap-2">
-            <textarea
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSend();
-                }
-              }}
-              rows={1}
-              placeholder="Ask the ISI Sales Advisor..."
-              className="max-h-32 flex-1 resize-none rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 transition-colors focus:border-cyan-500 focus:outline-none"
+          {conversation.messages.map((m, i) => (
+            <ConsoleEntry
+              key={i}
+              m={m}
+              isLatestAssistant={m.role === "assistant" && m === lastAssistant && !thinking}
             />
-            <button
-              onClick={handleSend}
-              disabled={thinking || !input.trim()}
-              className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500 text-white transition-colors hover:bg-cyan-400 disabled:opacity-50"
-            >
-              <Send className="h-4 w-4" />
-            </button>
-          </div>
-        </>
-      )}
+          ))}
+
+          {thinking && (
+            <div className="rounded-xl border border-violet-500/20 bg-violet-500/5 px-4 py-3">
+              <div className="flex items-center gap-2 text-xs text-violet-300">
+                <Activity className="h-3.5 w-3.5 animate-pulse text-violet-400" />
+                Models deliberating — challenging each other toward one-brain consensus...
+              </div>
+            </div>
+          )}
+        </div>
+
+        {error && <div className="mt-2 text-xs text-red-400">{error}</div>}
+
+        <div className="mt-3 flex items-end gap-2">
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
+            rows={1}
+            placeholder="Query the governance console..."
+            className="max-h-32 flex-1 resize-none rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm text-white placeholder-slate-500 transition-colors focus:border-cyan-500 focus:outline-none"
+          />
+          <button
+            onClick={handleSend}
+            disabled={thinking || !input.trim()}
+            className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500 text-white transition-colors hover:bg-cyan-400 disabled:opacity-50"
+          >
+            <Send className="h-4 w-4" />
+          </button>
+        </div>
+      </section>
     </div>
   );
 }
