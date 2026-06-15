@@ -7,10 +7,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ca-certificates \
   && rm -rf /var/lib/apt/lists/*
 
-COPY package.json bun.lock* ./
-RUN bun install --frozen-lockfile
-
 COPY . .
+
+RUN bun install --frozen-lockfile
 
 ENV NODE_ENV=production
 
@@ -24,14 +23,12 @@ WORKDIR /app
 
 RUN useradd -m appuser
 
-COPY package.json bun.lock* ./
+COPY . .
+
 RUN bun install --frozen-lockfile
 
 # Copy built assets from builder
 COPY --from=builder /app/build ./build
-
-# Copy source code needed by server
-COPY . .
 
 ENV NODE_ENV=production
 EXPOSE 3000
