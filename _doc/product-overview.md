@@ -58,6 +58,8 @@ Every governance decision is logged, timestamped, and auditable.
 
 11. **Governance Audit Tool** — Live AI output evaluation endpoint (`/governance-audit`). Any user can submit an AI output and receive an instant ISI verdict: verdict (approved/flagged/blocked), compliance score, severity rating, assessment, and recommended action. Functions as a live product demonstration and pre-sales proof-of-value tool.
 
+12. **ISI Sales Advisor** — A gated, subscription-protected conversational advisor (`/advisor`) that is both a live product demonstration and a consultative sales closer. Every buyer message is orchestrated simultaneously across the Online Trinity (Gemini, Claude, ChatGPT) and synthesized into a single governed reply by the ISI Governance Layer — proving the multi-model orchestration in real time, with a visible "models consulted" indicator. The advisor first captures the buyer's business context (annual AI spend, team size, industry, and current AI tools), then computes the buyer's governance-risk exposure and ROI live from their own numbers, working the conversation toward a configurable target deal (default $30,000/yr). Tone stays premium, authoritative, and calm — no hype. Conversations are persisted and reviewable in the Owner Backend.
+
 ## Revenue Model
 
 | Stream | Mechanism | Target Buyer |
