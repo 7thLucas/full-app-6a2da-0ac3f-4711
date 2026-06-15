@@ -50,7 +50,7 @@ Every governance decision is logged, timestamped, and auditable.
 
 7. **Licensing System** — Enables companies to pay for the right to embed or deploy the ISI engine in their own products.
 
-8. **Owner Backend** — The operator manages: client accounts, issued API keys, license tiers, usage metrics, subscription status, and payment history.
+8. **Owner Backend** — The operator manages: client accounts, issued API keys, license tiers, usage metrics, subscription status, payment history, and saved advisor conversations. The operator keeps 100% of all revenue — the platform takes no commission or cut.
 
 9. **Client Onboarding Portal** — Self-service or assisted signup flow for enterprise clients. Captures API keys for Gemini, Claude, and ChatGPT; provisions governance configuration.
 
