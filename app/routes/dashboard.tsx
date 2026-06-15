@@ -268,6 +268,12 @@ export default function DashboardPage() {
               {user.email}
             </span>
           )}
+          <Link
+            to="/advisor"
+            className="text-cyan-400 hover:text-cyan-300 text-xs border border-cyan-500/30 hover:border-cyan-500 px-3 py-1.5 rounded-lg transition-colors font-semibold"
+          >
+            Sales Advisor
+          </Link>
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-xs text-emerald-400 font-semibold">LIVE</span>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Shield, Search, Filter, Plus, ChevronRight, Users, Activity, Key, DollarSign, RefreshCw, Check, X } from "lucide-react";
 import { getUserFromRequest } from "~/modules/authentication/authentication.server";
 import { useConfigurables } from "~/modules/configurables";
+import { AdminAdvisorConversations } from "~/modules/agentic/advisor/components/admin-advisor-conversations";
 
 // ─── Server ───────────────────────────────────────────────────────────────────
 
@@ -145,6 +146,7 @@ export default function AdminPage() {
   const [filterTier, setFilterTier] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
   const [selectedClient, setSelectedClient] = useState<(typeof mockClients)[0] | null>(null);
+  const [adminTab, setAdminTab] = useState<"clients" | "advisor">("clients");
 
   const appName = loading ? "ISI Nexus" : (config?.appName ?? "ISI Nexus");
   const logoUrl = loading ? "" : (config?.logoUrl ?? "");
@@ -225,7 +227,30 @@ export default function AdminPage() {
           </div>
         )}
 
+        {/* Section tabs */}
+        <div className="flex gap-2 mb-6">
+          {[
+            { id: "clients" as const, label: "Client Accounts" },
+            { id: "advisor" as const, label: "Advisor Conversations" },
+          ].map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setAdminTab(t.id)}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                adminTab === t.id
+                  ? "bg-cyan-500 text-white"
+                  : "border border-slate-700 text-slate-300 hover:border-slate-500"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {adminTab === "advisor" && <AdminAdvisorConversations />}
+
         {/* Client table */}
+        {adminTab === "clients" && (
         <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
           <div className="px-6 py-5 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center gap-4">
             <h2 className="font-black text-white flex-1">Client Accounts</h2>
@@ -331,6 +356,7 @@ export default function AdminPage() {
             </table>
           </div>
         </div>
+        )}
       </div>
 
       {/* Client detail panel */}
