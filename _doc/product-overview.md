@@ -86,6 +86,8 @@ Every governance decision is logged, timestamped, and auditable.
 
 ISI Nexus is the first AI governance cybersecurity system — built to make enterprise AI deployments provably safe, auditable, and contractually defensible. It sits above every AI model a company runs, acting as an independent judge that cannot be influenced by the models it monitors. Not an antivirus. Not a firewall. A governance engine.
 
+**Core belief (the one thing every buyer must walk away with):** No single AI can be trusted on its own. ISI Nexus is the only layer that makes multiple AI models check and challenge each other in real time — so an enterprise never acts on a hallucination, a drift, or an unsafe decision. With ISI Nexus watching, AI becomes something a CISO can finally sign off on.
+
 ## Brand & Tone
 
 **Premium, authoritative, calm.** ISI is infrastructure, not a startup feature. Messaging emphasizes: reliability, independence, contractual defensibility, and the scale of risk prevented. Avoid hype language; let the threat eliminated do the selling.
