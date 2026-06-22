@@ -19,10 +19,6 @@ export default defineConfig({
         find: /^@qb\/(.+)$/,
         replacement: fileURLToPath(new URL("./app/modules/$1", import.meta.url)),
       },
-      {
-        find: "@remix-run/react",
-        replacement: "react-router",
-      },
     ],
   },
   ssr: {
